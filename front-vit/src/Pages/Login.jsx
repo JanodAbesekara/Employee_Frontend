@@ -16,17 +16,19 @@ const handleLogin = (e)=>{
   Email :username,
   Password:password,
  }
+  console.log(paylord);
  try{
-   const response =  Axios.post('https://localhost:7171/api/Employee/Login',paylord);
-   const { data } = response;
-   const token = data.token;
-   localStorage.setItem("EMPLOYERR", JSON.stringify(token));
+   const reaponse = Axios.post('https://localhost:7171/api/Employee/Login',paylord);
+  // const { data } = response;
+  // const token = data.token;
+  // localStorage.setItem("EMPLOYERR", JSON.stringify(token));
 
-    if(token){
-      window.alert("Successfully login");
-    }else{
-      window.alert("Error");
-    }
+  //  if(token){
+     
+   // }else{
+    //  window.alert("Error");
+   // }
+   window.alert(reaponse.data);
 
    
   } catch (error) {
