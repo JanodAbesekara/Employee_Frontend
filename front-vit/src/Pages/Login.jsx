@@ -3,43 +3,37 @@ import Navbar from "./Component/Navbar.jsx";
 import Axios from "axios";
 import { useState } from "react";
 
-
 function Login() {
+  const [email, setUsername] = useState('');
+  const [password, setpassword] = useState('');
 
-  const[username, setUsername] = useState("");
-  const[password,setpassword] = useState("");
+  const handleLogin = (e) => {
+    e.preventDefault();
 
-const handleLogin = (e)=>{
-  e.preventDefault();
+    try {
+      const response = Axios.post("https://localhost:7171/api/Employee/Login", {
+        email,
+        password,
+      });
 
- const paylord = {
-  Email :username,
-  Password:password,
- }
-  console.log(paylord);
- try{
-   const reaponse = Axios.post('https://localhost:7171/api/Employee/Login',paylord);
-  // const { data } = response;
-  // const token = data.token;
-  // localStorage.setItem("EMPLOYERR", JSON.stringify(token));
+      const token = response;
 
-  //  if(token){
-     
-   // }else{
-    //  window.alert("Error");
-   // }
-   window.alert(reaponse.data);
-
-   
-  } catch (error) {
-    window.alert(error.message);
-  }
-};
+      if (token === null) {
+        window.alert("Error");
+      } else {
+        localStorage.setItem("EMPLOYERR", JSON.stringify(token));
+        window.alert("Login Succesfully");
+        console.log(token);
+      }
+    } catch (error) {
+      window.alert(error.message);
+    }
+  };
 
   return (
     <div>
       <Navbar />
-     
+
       <div className="bg-gray-100 flex justify-center items-center h-screen mt-5 mb-10">
         {/* Left: Image */}
         <div className="w-1/2 h-screen hidden lg:block">
@@ -62,7 +56,7 @@ const handleLogin = (e)=>{
                 type="text"
                 id="username"
                 name="username"
-                onChange={(e)=>setUsername(e.target.value)}
+                onChange={(e) => setUsername(e.target.value)}
                 className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
                 autoComplete="off"
               />
@@ -76,7 +70,7 @@ const handleLogin = (e)=>{
                 type="password"
                 id="password"
                 name="password"
-                onChange={(e)=>setpassword(e.target.value)}
+                onChange={(e) => setpassword(e.target.value)}
                 className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
                 autoComplete="off"
               />

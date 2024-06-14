@@ -28,7 +28,7 @@ function Registration() {
     try {
       console.log(payload);
       const response = await Axios.post('https://localhost:7171/api/Employee/Register', payload);
-      window.alert(response.data);
+      window.alert("Registered Succfully");
       console.log(response.data);
     } catch (error) {
       window.alert(error.message);
